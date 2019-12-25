@@ -9,12 +9,12 @@ headers = {'accept': '*/*',
            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36'
            }
 
-base_url = 'https://ad.betcity.ru/d/off/events?rev=6&ver=48&csn=ooca9s'
+base_url = 'https://ad.betcity.ru/d/off/events?rev=6&ver=48&csn=ooca9s' #URL XHR запроса
 
 
 def betcity_pars(base_url, headers):
-    session = requests.Session()
-    request = session.post(base_url, headers=headers, params = {'ids' : 5326})
+    session = requests.Session() #создаем сессию
+    request = session.post(base_url, headers=headers, params = {'ids' : 5326}) #делаем запрос на ajax
     if request.status_code == 200:
         print(json.loads(request.text))
     else:
