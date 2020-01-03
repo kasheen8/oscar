@@ -14,9 +14,23 @@ base_url = 'https://ad.betcity.ru/d/off/events?rev=6&ver=48&csn=ooca9s' #URL XHR
 
 def betcity_pars(base_url, headers):
     session = requests.Session() #создаем сессию
-    request = session.post(base_url, headers=headers, params = {'ids' : 5326}) #делаем запрос на ajax
+    request = session.post(base_url, headers=headers, params = {'ids' : 5325}) #делаем запрос на ajax
     if request.status_code == 200:
-        print(json.loads(request.text))
+        full_request = json.loads(request.text)
+        print(full_request)
+        print(full_request['reply']['sports']['38']['chmps']['5325']['evts'].keys())
+        print(full_request['reply']['sports']['38']['chmps']['5325']['evts'])
+        titles = []
+        coefficients = []
+        for iter in list(full_request['reply']['sports']['38']['chmps']['5325']['evts'].keys()):
+            titles.append(full_request['reply']['sports']['38']['chmps']['5325']['evts'][iter]['name_ht'])
+            coefficients.append(full_request['reply']['sports']['38']['chmps']['5325']['evts'][iter]['main']['69']['data'][iter]['blocks']['YNm']['Y']['kf'])
+        nomin_title = full_request['reply']['sports']['38']['chmps']['5325']['name_ch']
+        print(nomin_title)
+        print(titles)
+        print(coefficients)
+        my_dict = {titles[i]: coefficients[i] for i in range(len(titles))}
+        print(my_dict)
     else:
         print('ERROR')
 
