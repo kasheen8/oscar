@@ -8,8 +8,6 @@ import json
 headers = {'accept': '*/*',
          'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.88 Safari/537.36'
            }
-#headers = {'accept': '*/*',
-#           'user-agent': 'Chrome/78.0.3904.108'}
 
 base_url_betcity_xhr = 'https://ad.betcity.ru/d/off/events?rev=6&ver=48&csn=ooca9s' #URL XHR запроса
 base_url_1x = 'https://1xstavka.ru/LineFeed/GetGameZip?id=%s&lng=ru&cfview=0&isSubGames=true&GroupEvents=true&allEventsGroupSubGames=true&countevents=250&partner=51&grMode=2' #URL XHR запроса
@@ -17,7 +15,7 @@ base_url_1x = 'https://1xstavka.ru/LineFeed/GetGameZip?id=%s&lng=ru&cfview=0&isS
 
 
 def betcity_pars(base_url, headers):                                                #парсинг коэффициентов с betcity
-    ids_betcity = [5325, 5326, 5327, 5328, 5329, 5330, 5331, 7902, 7903, 25370]
+    ids_betcity = [5325, 5326, 5327, 5328, 5329, 5330, 5331, 7903, 25370]
     full_pars = []
     for ids in ids_betcity:
         session = requests.Session() #создаем сессию
@@ -52,13 +50,13 @@ def xstavka_pars(base_url, headers):                                            
         if request.status_code == 200:
             full_request = json.loads(request.text)
             full_line = full_request['Value']['GE'][0]['E'][0]
-            name_line = full_request['Value']['O1']
-            print(name_line)
-            line = []
+            nomin_title = full_request['Value']['O1']
+            print(nomin_title)
+            line = {}
             for iter in full_line:
-                line.append({iter['PL']['N']:iter['C']})
+                line[iter['PL']['N']] = iter['C']
             print(line)
-            complete_line = {name_line : line}
+            complete_line = {nomin_title: line}
             full_pars.append(complete_line)
         else:
             print('ERROR')
