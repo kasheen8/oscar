@@ -64,7 +64,7 @@ def xstavka_pars(base_url, headers):                                            
 
 
 def main():
-    print(betcity_pars(base_url_betcity_xhr,headers))
+    #print(betcity_pars(base_url_betcity_xhr,headers))
     print(xstavka_pars(base_url_1x,headers))
 
 
