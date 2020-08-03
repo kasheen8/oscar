@@ -3,7 +3,6 @@
 ### oscar_main.py - основной файл.
 
 Запуск: python oscar_main.py
-Перед запуском необходимо подключить parser, db и dataanalysis
 
 ## oscar_parser.py
 Парсинг коэфициентов с нужной букмекерской конторы.
